@@ -1,0 +1,11 @@
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bookstore
+    username: root
+    password: qwer1234
+
+bookstore:
+  payment:
+    url: 127.0.0.1
+    port: 8090

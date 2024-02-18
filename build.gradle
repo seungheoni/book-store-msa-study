@@ -1,0 +1,55 @@
+// 플러그인 및 공통 설정 적용을 위한 설정 블록
+buildscript {
+	ext {
+		springBootVersion = '3.2.2'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+	}
+}
+
+// 모든 프로젝트에 적용되는 공통 설정
+allprojects {
+	group = 'com.example'
+	version = '0.0.1-SNAPSHOT'
+
+	repositories {
+		mavenCentral()
+	}
+}
+
+// 서브 프로젝트에 적용되는 설정
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
+
+	sourceCompatibility = '21'
+
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-web'
+		implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+		implementation 'org.postgresql:postgresql'
+		implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	}
+
+	tasks.named('test') {
+		useJUnitPlatform()
+	}
+}
+
+project(':bookstore-product') {
+	dependencies {
+		implementation project(':database')
+	}
+}
+
+project(':bookstore-payment') {
+	dependencies {
+		implementation project(':database')
+	}
+}
