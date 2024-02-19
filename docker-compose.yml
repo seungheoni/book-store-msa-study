@@ -1,7 +1,9 @@
 version: '3.1'
 
 services:
-  db:
+  bookstore-db:
+    container_name: bookstore-db
+    hostname: bookstore-db
     image: book-store-db:latest
     environment:
       POSTGRES_DB: bookstore
@@ -11,3 +13,30 @@ services:
       - ./database/dbdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - bookstore-network
+
+  bookstore-payment:
+    container_name: bookstore-payment
+    hostname: bookstore-payment
+    image: bookstore-payment:latest
+    ports:
+      - "8090:8090"
+    depends_on:
+      - bookstore-db
+    networks:
+      - bookstore-network
+
+  bookstore-product:
+    container_name: bookstore-product
+    hostname: bookstore-product
+    image: bookstore-product:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - bookstore-db
+    networks:
+      - bookstore-network
+
+networks:
+    bookstore-network:

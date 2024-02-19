@@ -43,12 +43,22 @@ subprojects {
 }
 
 project(':bookstore-product') {
+
+	bootJar {
+		archiveFileName = 'bookstore-product.jar'
+	}
+
 	dependencies {
 		implementation project(':database')
 	}
 }
 
 project(':bookstore-payment') {
+
+	bootJar {
+		archiveFileName = 'bookstore-payment.jar'
+	}
+
 	dependencies {
 		implementation project(':database')
 	}
