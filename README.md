@@ -1,6 +1,8 @@
 ## 개요
 MSA 공부용 미니 토이 프로젝트 
 
+### 요청·응답 모델(Request-Response)
+
 1. bookstore-product
 - 서점의 책에 대한 관리와 수량을 체크하는 모듈
    
